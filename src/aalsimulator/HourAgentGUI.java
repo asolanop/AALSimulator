@@ -25,6 +25,7 @@ public class HourAgentGUI extends JFrame {
     public HourAgentGUI(HourAgent agent){
         super(agent.getLocalName());
         _hourAgent = agent;
+        initGui();
     }
     
     private void initGui() {
