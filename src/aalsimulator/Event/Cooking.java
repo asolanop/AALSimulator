@@ -7,6 +7,7 @@ package aalsimulator.Event;
 
 import aalsimulator.ElderAgent;
 import jade.core.Agent;
+import jade.lang.acl.ACLMessage;
 import java.time.LocalTime;
 import java.util.Random;
 
@@ -24,7 +25,22 @@ public class Cooking extends Event {
     
     @Override
     public void inform_agents(Agent agent) {
-        
+        ACLMessage request = new ACLMessage(ACLMessage.INFORM);
+        request.addReceiver(((ElderAgent)agent).getEnvAgent());
+        request.setContent("aal.simulation.event.cooking.begin");
+        request.setConversationId("aal.simulation.event");
+        agent.send(request);
+        System.out.println("[COOK EVENT] Sendig cooking begin inform to " + ((ElderAgent)agent).getEnvAgent().getLocalName());
+    }
+    
+    @Override
+    public void inform_agents_end(Agent agent) {
+        ACLMessage request = new ACLMessage(ACLMessage.INFORM);
+        request.addReceiver(((ElderAgent)agent).getEnvAgent());
+        request.setContent("aal.simulation.event.cooking.end");
+        request.setConversationId("aal.simulation.event");
+        agent.send(request);
+        System.out.println("[COOK EVENT] Sendig cooking end inform to " + ((ElderAgent)agent).getEnvAgent().getLocalName());
     }
 
     @Override

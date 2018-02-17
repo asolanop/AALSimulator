@@ -61,6 +61,10 @@ public class ElderAgent extends Agent {
         return _eventHandler;
     }
     
+    public AID getEnvAgent() {
+        return _envAgent;
+    }
+    
     private void getEnviormentalAgents() {
         DFAgentDescription timeTemplate = new DFAgentDescription();
         DFAgentDescription envTemplate = new DFAgentDescription();

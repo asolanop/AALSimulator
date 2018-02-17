@@ -30,6 +30,10 @@ public abstract class Event {
         return END_TIME;
     }
     
+    public void inform_agents_end(Agent agent) {
+        System.out.println("Informing agents");
+    }
+    
     abstract public void inform_agents(Agent agent);
     
     abstract public int get_minutes_to_last();
