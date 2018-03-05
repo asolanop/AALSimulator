@@ -27,12 +27,14 @@ public class FullSleep extends Event  {
     public void inform_agents(Agent agent) {
         ACLMessage request = new ACLMessage(ACLMessage.PROPAGATE);
         request.addReceiver(((ElderAgent)agent).getHandlerAgent());
+        request.addReceiver(((ElderAgent)agent).getEnvAgent());
         request.setContent("aal.simulation.event.sleep.begin");
         request.setConversationId("aal.simulation.event");
         agent.send(request);
         System.out.println("[FULLSLEEP EVENT] Sendig event begin propagation to " + ((ElderAgent)agent).getHandlerAgent());
     }
     
+    @Override
     public void inform_agents_end(Agent agent) {
         ACLMessage request = new ACLMessage(ACLMessage.PROPAGATE);
         request.addReceiver(((ElderAgent)agent).getHandlerAgent());

@@ -21,14 +21,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Random;
 
- /*enum EVENTS {
-        COOK(1), TV(2), HANG(3), BATH(4), LEAVE(5), 
-        FULLSLEEP(6), SHORTSLEEP(6), OVERSLEEP(6), FALL(6);
-        
-        private int event_id;
-        EVENTS(int id){ event_id = id;}
-        public int event(){ return event_id; }
- }*/
 
 enum Events {
         COOK, TV, HANG, BATH, LEAVE, 
@@ -101,7 +93,7 @@ public class ElderAgent extends Agent {
     
     public class GetNextEvent extends Behaviour {
         private int _step = 0;
-        private MessageTemplate mt;
+        private MessageTemplate _mt;
         
         @Override
         public void action() {
@@ -138,13 +130,13 @@ public class ElderAgent extends Agent {
             myAgent.send(request);
             System.out.println("[ELDER AGENT] Sendig time request to " + _hourAgent.getLocalName() );
             // Prepare the template to get proposals
-            mt = MessageTemplate.and(MessageTemplate.MatchConversationId("aal.simulation.time"),
+            _mt = MessageTemplate.and(MessageTemplate.MatchConversationId("aal.simulation.time"),
                             MessageTemplate.MatchInReplyTo(request.getReplyWith()));
             _step = 1;
         }
         
         private void setTime() {
-            ACLMessage reply = myAgent.receive(mt);
+            ACLMessage reply = myAgent.receive(_mt);
             if (reply != null) {
                 if (reply.getPerformative() == ACLMessage.INFORM) {
                         // This is an offer 
